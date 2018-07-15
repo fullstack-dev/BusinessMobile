@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:AsystBussiness.Views"
+             xmlns:controls="clr-namespace:AsystBussiness.Controls"
+             x:Class="AsystBussiness.Views.RestaurantMenuListView">
+  <ContentView.Content>
+        <Grid BackgroundColor="#fff">
+            <ListView x:Name="ListView" HasUnevenRows="True" SeparatorColor="Transparent" SeparatorVisibility="None" IsVisible="false">
+                <x:Arguments>
+                    <ListViewCachingStrategy>
+                        <OnPlatform x:TypeArguments="ListViewCachingStrategy" Android="RecycleElement"/>
+                    </ListViewCachingStrategy>
+                </x:Arguments>
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <views:RestaurantMenuHeaderListView/>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:CustomCell>
+                            <views:RestaurantMenuItemView />
+                        </controls:CustomCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <views:ActivityIndicatorView x:Name="ActivityIndicatorView" IsVisible="true" IsRunning="true"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

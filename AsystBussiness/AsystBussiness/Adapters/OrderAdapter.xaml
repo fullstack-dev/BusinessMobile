@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AsystBussiness.Adapters.OrderAdapter">
+    <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand" Margin="0, 15, 0, 15">
+        <Label Text="{Binding Time}" TextColor="Black"/>
+
+        <Grid Margin="10, 0, 0, 0" IsVisible="{Binding IsDeliveryVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Delivery orders" TextColor="Black"/>
+            <Label Grid.Column="1" Text="{Binding DeliveryCount}" TextColor="Black"/>
+        </Grid>
+
+        <Grid Margin="10, 0, 0, 0" IsVisible="{Binding IsPickupVisible}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Pickup orders" TextColor="Black"/>
+            <Label Grid.Column="1" Text="{Binding PickupCount}" TextColor="Black"/>
+        </Grid>
+
+    </StackLayout>
+</ViewCell>

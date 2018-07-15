@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AsystBussiness"
+             xmlns:i18n="clr-namespace:AsystBussiness.Localization"
+             xmlns:pages="clr-namespace:AsystBussiness.Pages"
+             xmlns:views="clr-namespace:AsystBussiness.Views"
+             xmlns:controls="clr-namespace:AsystBussiness.Controls"
+             xmlns:behaviors="clr-namespace:AsystBussiness.Behaviors"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+			       xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="AsystBussiness.Pages.UserAccount.ServiceNotAvailablePage"
+             x:Name="thisPage"
+             Title="{i18n:Translate NotifyMe}">
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ScrollView VerticalOptions="StartAndExpand">
+                    <StackLayout Padding="10,0,10,0" Orientation="Vertical" VerticalOptions="FillAndExpand">
+                        <StackLayout Padding="20,0,20,0" Orientation="Vertical">
+                            <StackLayout.Spacing>
+                                <OnPlatform x:TypeArguments="x:Double" iOS="12" Android="6"/>
+                            </StackLayout.Spacing>
+
+                            <ffimageloading:CachedImage Margin="30" Source="leads_generation.png" Grid.Column="1" BackgroundColor="#ffffff" HorizontalOptions="Center" DownsampleToViewSize="true" Aspect="AspectFit"/>
+
+                            <StackLayout Margin="0,0,0,20" Spacing="20" Orientation="Vertical">
+                                <Label x:Name="LabelServicesAreNotCurrentlyAvailable" Text="{i18n:Translate ServicesAreNotCurrentlyAvailable}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" FontAttributes="Bold" FontSize="Medium" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                                <Label Text="{i18n:Translate BeTheFirstKnow}" TextColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" FontSize="Medium" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+
+                            <StackLayout Margin="0" Orientation="Vertical">
+                                <StackLayout.Spacing>
+                                    <OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+                                </StackLayout.Spacing>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Entry x:Name="EntryFullName" Placeholder="{i18n:Translate FullName}" Text="" HorizontalOptions="FillAndExpand" >
+                                        <Entry.Behaviors>
+                                            <behaviors:RequiredValidator FieldName="{i18n:Translate FullName}"  x:Name="fullnameValidator" />
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                </StackLayout>
+                                <Label Text="{Binding Source={x:Reference fullnameValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+
+                            <StackLayout Margin="0" Orientation="Vertical">
+                                <StackLayout.Spacing>
+                                    <OnPlatform x:TypeArguments="x:Double" iOS="3" Android="0"/>
+                                </StackLayout.Spacing>
+                                <StackLayout Orientation="Horizontal" Spacing="10">
+                                    <Entry x:Name="EntryEmail" Keyboard="Email"  Placeholder="{i18n:Translate Email}" Text="" HorizontalOptions="FillAndExpand" >
+                                        <Entry.Behaviors>
+                                            <behaviors:EmailValidator x:Name="emailValidator" />
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                </StackLayout>
+                                <Label Text="{Binding Source={x:Reference emailValidator}, Path=Reason}" FontSize="Small" HorizontalOptions="FillAndExpand" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <views:GreenButton x:Name="GreenButtonNotifyMe" Grid.Row="1" Margin="20,20,20,20" Text="{i18n:Translate NotifyMe}" IsEnabled="False">
+                    <views:GreenButton.Triggers>
+                        <MultiTrigger TargetType="views:GreenButton">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference fullnameValidator}, Path=IsValid}" Value="True" />
+                                <BindingCondition Binding="{Binding Source={x:Reference emailValidator}, Path=IsValid}" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiTrigger>
+                    </views:GreenButton.Triggers>
+                </views:GreenButton>
+                <Grid Grid.Row="1" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+            </Grid>
+            <views:ActivityIndicatorView
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</pages:ContentPageBase>

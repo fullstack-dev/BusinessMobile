@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:AsystBussiness.Pages"
+             xmlns:local="clr-namespace:AsystBussiness"
+             xmlns:views="clr-namespace:AsystBussiness.Views"
+             xmlns:i18n="clr-namespace:AsystBussiness.Localization"
+             xmlns:behaviors="clr-namespace:AsystBussiness.Behaviors"
+             xmlns:controls="clr-namespace:AsystBussiness.Controls"
+             x:Class="AsystBussiness.Pages.UserAccount.ProfilePage"
+             x:Name="thisPage"
+             Title="{i18n:Translate ProfilePageTitle}">
+    <Grid BackgroundColor="White" RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height = "Auto"/>
+			<RowDefinition Height = "*"/>
+		</Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height ="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid HorizontalOptions="Center" Padding ="12,15,12,0">
+                <StackLayout x:Name="StackLayoutProfile" Opacity="0" Orientation="Vertical" Spacing="0">
+                    <StackLayout Orientation="Horizontal" Padding="0,6,0,3" HorizontalOptions="Center">
+                        <Label FontAttributes="Bold" FontSize="Small" HorizontalOptions="Fill" x:Name="Name" TextColor="Black"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Padding="0,3,0,3" Spacing="0" HorizontalOptions="Center">
+                        <Label Text="{i18n:Translate EmailInput}" Margin="0,0,3,0" FontSize="Small" HorizontalOptions="Fill"/>
+                        <Label FontSize="Small" HorizontalOptions="Fill" x:Name="Email" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Padding="0,3,0,6" Spacing="0" HorizontalOptions="Center">
+                        <Label Text="{i18n:Translate MobileInput}" Margin="0,0,3,0" FontSize="Small" HorizontalOptions="Fill"/>
+                        <Label FontSize="Small" HorizontalOptions="Fill" x:Name="Phone"/>
+                    </StackLayout>
+                  <StackLayout Orientation="Horizontal" Padding="0,3,0,6" Spacing="0" HorizontalOptions="Center">
+                    <Label Text="Restaurant" Margin="0,0,3,0" FontSize="Small"/>
+                    <Picker x:Name="RestaurantPicker" WidthRequest="200"/>
+                  </StackLayout>
+                </StackLayout>
+                <Grid HorizontalOptions="Center">
+                    <ActivityIndicator Color="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" WidthRequest="30" HeightRequest="30" x:Name="ActivityIndicatorProfile" IsVisible="true" IsRunning="true" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Grid>
+            </Grid>
+        </Grid>
+        <views:ActivityIndicatorView Grid.RowSpan="2" IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}" />
+	</Grid>
+</pages:ContentPageBase>

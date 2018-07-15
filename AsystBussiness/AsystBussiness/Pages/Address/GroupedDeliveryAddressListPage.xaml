@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:AsystBussiness.Pages"
+             xmlns:views="clr-namespace:AsystBussiness.Views"
+             xmlns:local="clr-namespace:AsystBussiness"
+             xmlns:i18n="clr-namespace:AsystBussiness.Localization"
+             x:Class="AsystBussiness.Pages.Address.GroupedDeliveryAddressListPage"
+             x:Name="thisPage">
+    <Grid IsClippedToBounds="false">
+        <StackLayout x:Name="StackLayoutBackgroundBehind" Orientation="Vertical" IsEnabled="false">
+            <Image x:Name="ImageBackgroundBehind" Source="whereareyou.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" IsEnabled="false" Opacity="0.25"/>
+        </StackLayout>
+        <ScrollView x:Name="scrollView" IsVisible="false" Padding="0,10,0,0">
+            <StackLayout BindingContext="{x:Reference thisPage}" HorizontalOptions="Fill" >
+                <Grid Margin="20, 3, 20, 0">
+                    <Grid HorizontalOptions="Fill" VerticalOptions="Fill" BackgroundColor="{Binding LightGray, Source={x:Static local:AppearanceBase.Instance}}" Padding="1.1">
+                        <StackLayout Spacing="8" Orientation="Vertical" Padding="10, 10, 10, 24" BackgroundColor="White">
+                            <Label FontSize="Large" Text="{i18n:Translate Addresses}" TextColor="Gray"/>
+                            <!--						  	  	<Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+-->
+                            <StackLayout x:Name="StackLayoutGroupedDeliveryAddress" Orientation="Vertical">
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <StackLayout x:Name="StackLayoutBackgroundFront" Orientation="Vertical" IsEnabled="false">
+            <Image  x:Name="ImageBackgroundFront" Source="whereareyou.png" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand" IsEnabled="false" Opacity="0.15"/>
+        </StackLayout>
+        <views:ActivityIndicatorView
+				IsRunning="{Binding Source={x:Reference thisPage}, Path=IsBusy}" IsVisible="{Binding Source={x:Reference thisPage}, Path=IsBusy}"/>
+    </Grid>
+</pages:ContentPageBase>

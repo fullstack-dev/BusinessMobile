@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AsystBussiness"
+             xmlns:views="clr-namespace:AsystBussiness.Views"
+             x:Class="AsystBussiness.Pages.ScheduleDelivery.ZipPage"
+             Title="Schedule Delivery">
+    <ContentPage.Content>
+        <Grid Padding="0" RowSpacing="0">
+
+            <Grid BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" VerticalOptions="Start" 
+                  Margin="5, 10, 5, 5" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Text="Step 1" TextColor="White" Margin="10"/>
+                <Label Grid.Row="0" Text="Zip Code" TextColor="White" HorizontalOptions="End" Margin="10"/>
+
+                <StackLayout Grid.Row="1" Orientation="Vertical" BackgroundColor="White" Margin="1" HorizontalOptions="Fill" Padding="10">
+                    <Label Text="Zip Code" TextColor="Black"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Entry BackgroundColor="White" TextColor="Black" Text="{Binding ZipCode}" HorizontalOptions="Fill"/>
+                        <Button Grid.Column="1" Text="Submit" TextColor="White" BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" Command="{Binding CheckZipAvailability}"
+                                IsEnabled="{Binding IsZipCheckEnabled}" HorizontalOptions="End"/>
+                    </Grid>
+                    <Label Text="{Binding ZipInformation}" TextColor="Black"/>
+                </StackLayout>
+            </Grid>
+
+            <views:ActivityIndicatorView IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

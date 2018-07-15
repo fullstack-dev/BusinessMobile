@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AsystBussiness"
+             x:Class="AsystBussiness.Pages.ScheduleDelivery.DeliveryPage"
+             xmlns:views="clr-namespace:AsystBussiness.Views"
+             Title="Schedule Delivery">
+    <ContentPage.Content>
+        <Grid Padding="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" 
+                  VerticalOptions="Start" Margin="5, 10, 5, 5" RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Text="Step 2" TextColor="White" Margin="10"/>
+                <Label Grid.Row="0" Text="Delivery Information" TextColor="White" HorizontalOptions="End" Margin="10"/>
+
+                <StackLayout Grid.Row="1" Orientation="Vertical" BackgroundColor="White" Margin="1" HorizontalOptions="Fill" Padding="10">
+                    <Grid>
+                        <DatePicker HorizontalOptions="Start" Date="{Binding DeliveryDate}" />
+                        <Picker ItemsSource="{Binding AvailableDeliveryTimes}" HorizontalOptions="End" SelectedItem="{Binding DeliveryTime}" WidthRequest="100"/>
+                    </Grid>
+
+                    <Grid ColumnSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="140"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Entry Grid.Column="0" Text="{Binding DeliveryName}" HorizontalOptions="Fill"/>
+                        <Entry Grid.Column="1" Text="{Binding DeliveryPhone}" HorizontalOptions="Fill"/>
+                    </Grid>
+
+                    <Entry Text="{Binding DeliveryAddress}" HorizontalOptions="Fill" TextChanged="Entry_TextChanged"/>
+
+                    <Grid IsVisible="{Binding IsAutoSuggestionsVisible}" BackgroundColor="White" Padding="20, 0, 20, 0">
+                        <ListView VerticalOptions="StartAndExpand"
+                                  HeightRequest="{Binding AutoSuggestionListHeight}"
+	                              ItemSelected="ListView_ItemSelected"
+	                              ItemsSource="{Binding Places}"
+							      SeparatorColor="Transparent"
+							      SeparatorVisibility="None"
+							      HasUnevenRows="False"
+                                  RowHeight="50">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <Grid VerticalOptions="Center">
+                                                <StackLayout Orientation="Vertical" Padding="0, 10" Spacing="0">
+                                                    <StackLayout Orientation="Horizontal" Spacing="0">
+                                                        <Label Text="{Binding MainTextLeft}" TextColor="Black" FontSize="Small" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                                                        <Label Text="{Binding MainTextMatch}" TextColor="Black" FontSize="Small" FontAttributes="Bold" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                                                        <Label Text="{Binding MainTextRight}" TextColor="Black" FontSize="Small" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                                                    </StackLayout>
+                                                    <Label Text="{Binding StructuredFormatting.SecondaryText}" TextColor="Gray" FontSize="Small" VerticalOptions="Center" LineBreakMode="TailTruncation"/>
+                                                </StackLayout>
+                                                <Grid BackgroundColor="{Binding LineSeparatorColor, Source={x:Static local:AppearanceBase.Instance}}" HeightRequest="1" VerticalOptions="Start" HorizontalOptions="Fill"/>
+                                            </Grid>
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+                </StackLayout>
+            </Grid>
+
+            <Grid Grid.Row="1" VerticalOptions="Start" BackgroundColor="White" Margin="20, 0, 20, 0">
+                <Button Text="Next" TextColor="White" BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}" HorizontalOptions="End"
+                        IsEnabled="{Binding IsNextStepEnabled}" Command="{Binding NavigateToNextStep}"/>
+            </Grid>
+
+            <views:ActivityIndicatorView Grid.RowSpan="2" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:ContentPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:AsystBussiness.Pages"
+             xmlns:i18n="clr-namespace:AsystBussiness.Localization"
+             xmlns:local="clr-namespace:AsystBussiness"
+             xmlns:views="clr-namespace:AsystBussiness.Views"
+             xmlns:behaviors="clr-namespace:AsystBussiness.Behaviors"
+             xmlns:controls="clr-namespace:AsystBussiness.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+			       xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="AsystBussiness.HomeMasterPage"
+             x:Name="thisPage"
+             Title="{i18n:Translate ServiceListing}"
+			       Icon="menu.png">
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" RowSpacing="3" BackgroundColor="{Binding PrimaryColor, Source={x:Static local:AppearanceBase.Instance}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <StackLayout Orientation="Vertical" Padding="12, 20, 12, 3">
+                    <Label x:Name="lbName" TextColor="#fff" />
+                </StackLayout>
+            </Grid>
+            <ListView BackgroundColor="Transparent" Grid.Row="1" x:Name="listView" VerticalOptions="FillAndExpand" SeparatorVisibility="None" ItemsSource="{Binding Source={x:Reference thisPage}, Path=Pages}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid BackgroundColor="{Binding BackgroundColor}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="auto" />
+                                    <ColumnDefinition  Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Padding="10, 6" >
+                                    <ffimageloading:CachedImage  Source="{Binding IconSource}" WidthRequest="22" CacheType="Memory"/>
+                                </Grid>
+                                <Grid Grid.Column="1" VerticalOptions="Center">
+                                    <Label Text="{Binding Title}" TextColor="#fff" />
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Grid.Row="2">
+                <StackLayout Orientation="Vertical" Padding="10, 0" Spacing="6" HorizontalOptions="End">
+                    <Image x:Name="ImageLogo" Source="asystyou_green.png" VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" />
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                        <Label x:Name="LabelAppVersion" Text="{i18n:Translate AppVersion}" TextColor="#99EE99" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</pages:ContentPageBase>

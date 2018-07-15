@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:local="clr-namespace:AsystBussiness"
+             xmlns:converters="clr-namespace:AsystBussiness.Converters"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AsystBussiness.App">
+    <Application.Resources>
+
+        <!-- Application resource dictionary -->
+        <ResourceDictionary>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarTextColor" Value="White"/>
+            </Style>
+            <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="#ffffff" />
+            </Style>
+
+            <converters:SimpleDateToStringConverter x:Key="simpleDateToStringConverter"/>
+            <converters:AddressToStringConverter x:Key="addressToStringConverter"/>
+            <converters:RestaurantImageConveter x:Key="restaurantImageConveter"/>
+            <converters:MetersToMilesConverter x:Key="metersToMilesConverter"/>
+            <converters:DeliveryPickupToStringConverter x:Key="deliveryPickupToStringConverter"/>
+            <converters:CloseToStringConverter x:Key="closeToStringConverter"/>
+            <converters:StringToVisibleConverter x:Key="stringToVisibleConverter"/>
+            <converters:UrlImageConveter x:Key="urlImageConveter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
